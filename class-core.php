@@ -56,52 +56,6 @@ class Core
 
         add_action('rest_api_init', [$this, 'register_custom_taxonomies_api']);
 
-
-        add_action('init', [$this, 'custom_tax']);
-    }
-
-    function custom_tax(){
-
-// Add new taxonomy, make it hierarchical like categories
-//first do the translations part for GUI
-
-        $labels = array(
-            'name' => _x( 'Brands', 'taxonomy general name' ),
-            'singular_name' => _x( 'Brand', 'taxonomy singular name' ),
-            'search_items' =>  __( 'Search Brands' ),
-            'all_items' => __( 'All Brands' ),
-            'parent_item' => __( 'Parent Brand' ),
-            'parent_item_colon' => __( 'Parent Brand:' ),
-            'edit_item' => __( 'Edit Brand' ),
-            'update_item' => __( 'Update Brand' ),
-            'add_new_item' => __( 'Add New Brand' ),
-            'new_item_name' => __( 'New Brand Name' ),
-            'menu_name' => __( 'Brands' ),
-        );
-
-        $capabilities = array(
-            'manage_terms'               => 'manage_woocommerce',
-            'edit_terms'                 => 'manage_woocommerce',
-            'delete_terms'               => 'manage_woocommerce',
-            'assign_terms'               => 'manage_woocommerce',
-        );
-
-// Now register the taxonomy
-        $args = array(
-            'labels'                     => $labels,
-            'show_in_rest'               => true,
-            'hierarchical'               => true,
-            'public'                     => true,
-            'show_ui'                    => true,
-            'show_admin_column'          => false,
-            'show_in_nav_menus'          => true,
-            'show_tagcloud'              => true,
-            'capabilities'               => $capabilities,
-
-
-        );
-        register_taxonomy( 'brands', array( 'product' ), $args );
-        register_taxonomy_for_object_type( 'brands', 'product' );
     }
 
     function register_custom_taxonomies_api()
